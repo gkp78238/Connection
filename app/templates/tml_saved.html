@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>TML File Saved</h2>
+    <p>The modified TML file "{{ filename }}" has been successfully saved.</p>
+    
+    <div id="chatContainer">
+        <h3>TML Insights Chatbot</h3>
+        <div id="chatMessages"></div>
+        <input type="text" id="userInput" placeholder="Ask about your TML file...">
+        <button id="sendBtn">Send</button>
+    </div>
+
+    <a href="{{ url_for('main.index') }}" class="btn btn-primary">Return to Home</a>
+</div>
+
+<script>
+document.getElementById('sendBtn').addEventListener('click', function() {
+    const userInput = document.getElementById('userInput');
+    const question = userInput.value;
+    if (question.trim() === '') return;
+
+    fetch("{{ url_for('main.tml_insights') }}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({question: question, tml_content: "{{ filename }}"})
+    })
+    .then(response => response.json())
+    .then(data => {
+        const chatMessages = document.getElementById('chatMessages');
+        chatMessages.innerHTML += `<p><strong>You:</strong> ${question}</p>`;
+        chatMessages.innerHTML += `<p><strong>Bot:</strong> ${data.response}</p>`;
+        userInput.value = '';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while getting insights.');
+    });
+});
+</script>
+{% endblock %}
+
+
+

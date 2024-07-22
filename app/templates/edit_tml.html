@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit TML File</h2>
+<form method="post">
+    <h3>Add Join</h3>
+    <div class="form-group">
+        <label for="joinType">Join Type:</label>
+        <select class="form-control" id="joinType" name="joinType">
+            <option value="INNER">INNER</option>
+            <option value="OUTER">OUTER</option>
+        </select>
+    </div>
+    
+
+    <label for="join_condition">Join Condition:</label>
+    <input type="text" name="join_condition" required><br>
+
+    <label for="destination_table">Destination Table:</label>
+    <input type="text" name="destination_table" required><br>
+
+    <h3>Rename Column</h3>
+    <label for="old_column_name">Current Column Name:</label>
+    <input type="text" name="old_column_name"><br>
+
+    <label for="new_column_name">New Column Name:</label>
+    <input type="text" name="new_column_name"><br>
+
+    <h3>Add New Column</h3>
+    <label for="new_column_name">New Column Name:</label>
+    <input type="text" name="new_column_name"><br>
+
+    <label for="new_column_type">New Column Type:</label>
+    <input type="text" name="new_column_type"><br>
+
+    <input type="submit" value="Save Changes" class="btn btn-primary">
+</form>
+{% endblock %}

@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+
+{% block title %}Update TML File{% endblock %}
+
+{% block content %}
+<div class="update-container">
+    <h1 class="page-title">Update Your TML File</h1>
+
+    <div class="update-steps">
+        <div class="step active">
+            <div class="step-number">1</div>
+            <div class="step-title">Upload</div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-title">Preview</div>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-title">Update</div>
+        </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('main.update_tml') }}" enctype="multipart/form-data">
+        <div class="upload-area" id="dropZone">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Drag and drop your TML file here or click to browse</p>
+            <input type="file" class="form-control-file" id="tmlFile" name="tmlFile" accept=".tml" required>
+        </div>
+
+        <div class="file-preview" id="filePreview">
+            <h3>File Preview</h3>
+            <pre><code id="fileContent"></code></pre>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">Update TML</button>
+    </form>
+
+    <div id="chatContainer" style="display: none;">
+        <h2>TML Insights Chatbot</h2>
+        <div id="chatMessages"></div>
+        <input type="text" id="userInput" placeholder="Ask about your TML file...">
+        <button id="sendBtn">Send</button>
+    </div>
+</div>
+
+<style>
+    .update-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .page-title {
+        text-align: center;
+        color: var(--text-color);
+        margin-bottom: 30px;
+    }
+
+    .update-steps {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    .step {
+        display: flex;
+        align-items: center;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+    }
+
+    .step.active {
+        opacity: 1;
+    }
+
+    .step-number {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: var(--button-bg);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+    }
+
+    .upload-area {
+        border: 2px dashed var(--button-bg);
+        border-radius: 10px;
+        padding: 40px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .upload-area:hover {
+        background-color: rgba(var(--button-bg-rgb), 0.1);
+    }
+
+    .upload-area i {
+        font-size: 48px;
+        color: var(--button-bg);
+        margin-bottom: 10px;
+    }
+
+    .progress-bar {
+        height: 10px;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        margin-top: 20px;
+        overflow: hidden;
+        display: none;
+    }
+
+    .progress {
+        height: 100%;
+        background-color: var(--button-bg);
+        width: 0%;
+        transition: width 0.3s ease;
+    }
+
+    .file-preview {
+        margin-top: 30px;
+        display: none;
+    }
+
+    .file-preview pre {
+        background-color: var(--container-bg);
+        padding: 15px;
+        border-radius: 5px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+        background-color: var(--container-bg);
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 5px;
+        max-width: 400px;
+    }
+
+    .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
+
+    .modal-buttons button {
+        margin-left: 10px;
+    }
+
+    #chatContainer {
+        margin-top: 30px;
+        border: 1px solid var(--button-bg);
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    #chatMessages {
+        height: 200px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+
+    #userInput {
+        width: calc(100% - 70px);
+        padding: 5px;
+    }
+
+    #sendBtn {
+        width: 60px;
+        padding: 5px;
+        background-color: var(--button-bg);
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('tmlFile');
+    const filePreview = document.getElementById('filePreview');
+    const fileContent = document.getElementById('fileContent');
+    let tmlContent = '';
+
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.style.backgroundColor = 'rgba(var(--button-bg-rgb), 0.1)';
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.style.backgroundColor = '';
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.style.backgroundColor = '';
+        fileInput.files = e.dataTransfer.files;
+        handleFileUpload();
+    });
+
+    fileInput.addEventListener('change', handleFileUpload);
+
+    function handleFileUpload() {
+        const file = fileInput.files[0];
+        if (file && file.name.endsWith('.tml')) {
+            previewFile(file);
+        }
+    }
+
+    function previewFile(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            tmlContent = e.target.result;
+            fileContent.textContent = tmlContent;
+            filePreview.style.display = 'block';
+            document.getElementById('chatContainer').style.display = 'block';
+        };
+        reader.readAsText(file);
+    }
+
+    document.getElementById('sendBtn').addEventListener('click', function() {
+        const userInput = document.getElementById('userInput');
+        const question = userInput.value;
+        if (question.trim() === '') return;
+
+        fetch("{{ url_for('main.tml_insights') }}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({question: question, tml_content: tmlContent})
+        })
+        .then(response => response.json())
+        .then(data => {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML += `<p><strong>You:</strong> ${question}</p>`;
+            chatMessages.innerHTML += `<p><strong>Bot:</strong> ${data.response}</p>`;
+            userInput.value = '';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while getting insights.');
+        });
+    });
+    
+</script>
+{% endblock %}

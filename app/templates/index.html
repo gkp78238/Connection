@@ -1,0 +1,327 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="home-container">
+    <section class="hero">
+        <h1 class="typing-animation glow-text">Welcome to TML Updater</h1>
+        <p class="fade-in shimmer-text">Streamline your ThoughtSpot data modeling with our powerful TML updating tool</p>
+    </section>
+    
+    <section class="what-is-tml-updater reveal-on-scroll">
+        <h2 class="section-title">What is TML Updater?</h2>
+        <p class="section-description">TML Updater is an innovative tool designed to simplify the process of updating ThoughtSpot Modeling Language (TML) files, enhancing your data modeling capabilities.</p>
+        <div class="features animated-infographic">
+            <div class="feature-item">Easy TML Editing</div>
+            <div class="feature-item">Automated Updates</div>
+            <div class="feature-item">Error Prevention</div>
+        </div>
+    </section>
+    
+
+   
+
+    <section class="thoughtspot-integration">
+        <h2 class="section-title">Seamless ThoughtSpot Integration</h2>
+        <div class="integration-diagram">
+            <div class="diagram-item">TML Updater</div>
+            <div class="diagram-arrow">↔</div>
+            <div class="diagram-item">ThoughtSpot</div>
+        </div>
+        <p class="section-description">Our tool integrates perfectly with ThoughtSpot, ensuring a smooth workflow for your data modeling needs.</p>
+    </section>
+
+    <section class="benefits">
+        <h2 class="section-title">Benefits of Using TML Updater</h2>
+        <div class="benefit-cards">
+            <div class="card flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h3>Time-Saving</h3>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>Reduce hours of manual work to minutes of automated updates.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h3>Error Reduction</h3>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>Minimize mistakes with our intelligent error-checking system.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h3>User-Friendly</h3>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>Intuitive interface suitable for both beginners and experts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-thoughtspot reveal-on-scroll">
+        <h2 class="section-title">About ThoughtSpot</h2>
+        <p class="section-description">ThoughtSpot is a modern analytics platform that uses artificial intelligence to deliver insights from your data in seconds.</p>
+        <div class="thoughtspot-features animated-infographic">
+            <div class="feature-item">AI-Powered Analytics</div>
+            <div class="feature-item">Natural Language Processing</div>
+            <div class="feature-item">Real-time Insights</div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 class="section-title">Ready to Streamline Your TML Updates?</h2>
+        <div class="cta-buttons">
+            <a href="{{ url_for('main.update') }}" class="btn btn-primary pulse">Start Updating TML</a>
+            <a href="{{ url_for('main.learn_more') }}" class="btn btn-secondary pulse">Learn More</a>
+        </div>
+    </section>
+</div>
+
+<style>
+    style>
+    .learn-more-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--text-color);
+    }
+
+    .section-description {
+        font-size: 1.2rem;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+    }
+
+   
+
+    .glow-text {
+        text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    }
+
+    .shimmer-text {
+        background: linear-gradient(90deg, #000, #fff, #000);
+        background-size: 200% auto;
+        color: #000;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 3s linear infinite;
+    }
+
+    @keyframes shine {
+        to {
+            background-position: 200% center;
+        }
+    }
+
+    .animated-infographic {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 2rem;
+    }
+
+    .infographic-item {
+        padding: 1rem;
+        background-color: var(--container-bg);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .infographic-item:hover {
+        transform: translateY(-10px);
+    }
+
+    .steps {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+    }
+
+    .step {
+        flex: 1;
+        text-align: center;
+        padding: 1rem;
+        margin: 0 1rem;
+        background-color: var(--container-bg);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .icon-pulse {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .zoom-on-hover:hover {
+        transform: scale(1.05);
+    }
+
+    .benefit-cards {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 2rem;
+    }
+
+    .flip-card {
+        background-color: transparent;
+        width: 300px;
+        height: 200px;
+        perspective: 1000px;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .flip-card-front {
+        background-color: var(--container-bg);
+        color: var(--text-color);
+    }
+
+    .flip-card-back {
+        background-color: var(--button-bg);
+        color: white;
+        transform: rotateY(180deg);
+    }
+
+    .integration-diagram {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 2rem 0;
+    }
+
+    .diagram-item {
+        padding: 1rem;
+        background-color: var(--container-bg);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .diagram-arrow {
+        font-size: 2rem;
+        margin: 0 1rem;
+    }
+
+    .testimonial-carousel {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .testimonial {
+        padding: 2rem;
+        background-color: var(--container-bg);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin-top: 2rem;
+    }
+
+    .learn-more-links {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .btn {
+        margin: 0 1rem;
+    }
+
+    .pulse {
+        animation: pulse 2s infinite;
+    }
+
+    @media (max-width: 768px) {
+        .steps, .benefit-cards {
+            flex-direction: column;
+        }
+
+        .step, .flip-card {
+            margin-bottom: 1rem;
+        }
+    }
+    .hero {
+    padding: 30px 0 10px; /* Reduced bottom padding */
+    text-align: center;
+    color: var(--text-color);
+    background-color: var(--container-bg);
+}
+
+.what-is-tml-updater {
+    margin-top: -20px; /* Reduced top margin */
+}
+
+.section-title {
+    margin-bottom: 1rem; /* Reduced bottom margin */
+}
+
+.section-description {
+    margin-bottom: 1rem; /* Reduced bottom margin */
+}
+
+.animated-infographic {
+    margin-top: 1rem; /* Reduced top margin */
+}
+.cta-section {
+    text-align: center;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+</style>
+
+
+<script>
+    AOS.init();
+</script>
+{% endblock %}

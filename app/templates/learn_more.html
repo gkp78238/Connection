@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="learn-more-container">
+    <section class="hero parallax-bg">
+        <h1 class="typing-animation glow-text">Discover the Power of ThoughtSpot</h1>
+        <p class="fade-in shimmer-text">Revolutionize your data analytics with AI-driven insights</p>
+    </section>
+
+    <section class="what-is-thoughtspot reveal-on-scroll">
+        <h2 class="section-title">What is ThoughtSpot?</h2>
+        <p class="section-description">ThoughtSpot is a modern analytics platform that uses artificial intelligence to deliver insights from your data in seconds.</p>
+        <div class="infographic animated-infographic">
+            <!-- Placeholder for infographic -->
+            <div class="infographic-item">AI-Powered Analytics</div>
+            <div class="infographic-item">Natural Language Processing</div>
+            <div class="infographic-item">Real-time Insights</div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2 class="section-title">How ThoughtSpot Works</h2>
+        <div class="steps">
+            <div class="step reveal-on-scroll zoom-on-hover">
+                <i class="fas fa-database icon-pulse"></i>
+                <h3>Connect Your Data</h3>
+                <p>Easily connect to any data source, on-premises or in the cloud.</p>
+            </div>
+            <div class="step reveal-on-scroll zoom-on-hover">
+                <i class="fas fa-search icon-pulse"></i>
+                <h3>Search to Analyze</h3>
+                <p>Use natural language to ask questions and get instant answers.</p>
+            </div>
+            <div class="step reveal-on-scroll zoom-on-hover">
+                <i class="fas fa-chart-bar icon-pulse"></i>
+                <h3>Automated Insights</h3>
+                <p>AI-driven analytics uncover hidden patterns and anomalies.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <h2 class="section-title">Benefits of ThoughtSpot</h2>
+        <div class="benefit-cards">
+            <div class="card flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h3>Speed</h3>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>Get insights in seconds, not days or weeks.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h3>Ease of Use</h3>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>Natural language interface for all skill levels.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h3>AI-Powered</h3>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>Leverage machine learning for deeper insights.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="integration reveal-on-scroll">
+        <h2 class="section-title">ThoughtSpot and Our TML Updater</h2>
+        <div class="integration-diagram">
+            <!-- Placeholder for integration diagram -->
+            <div class="diagram-item">ThoughtSpot</div>
+            <div class="diagram-arrow">↔</div>
+            <div class="diagram-item">TML Updater</div>
+        </div>
+        <p class="section-description">Our TML Updater seamlessly integrates with ThoughtSpot, allowing you to effortlessly manage and update your ThoughtSpot Modeling Language (TML) files, enhancing your data modeling capabilities.</p>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title">Success Stories</h2>
+        <div class="testimonial-carousel">
+            <div class="testimonial">
+                <p>"ThoughtSpot has transformed how we analyze data, making insights accessible to everyone in our organization."</p>
+                <cite>- John Doe, Data Analyst at XYZ Corp</cite>
+            </div>
+            <!-- Add more testimonials here -->
+        </div>
+    </section>
+
+    <section class="learn-more-links reveal-on-scroll">
+        <h2 class="section-title">Learn More</h2>
+        <a href="#" class="btn btn-primary pulse">Request a Demo</a>
+        <a href="#" class="btn btn-secondary pulse">ThoughtSpot Documentation</a>
+    </section>
+</div>
+
+<style>
+    .learn-more-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--text-color);
+    }
+
+    .section-description {
+        font-size: 1.2rem;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+    }
+
+    .parallax-bg {
+        background-image: url('path/to/your/background-image.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 100px 0;
+        text-align: center;
+        color: white;
+    }
+
+    .glow-text {
+        text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    }
+
+    .shimmer-text {
+        background: linear-gradient(90deg, #000, #fff, #000);
+        background-size: 200% auto;
+        color: #000;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 3s linear infinite;
+    }
+
+    @keyframes shine {
+        to {
+            background-position: 200% center;
+        }
+    }
+
+    .animated-infographic {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 2rem;
+    }
+
+    .infographic-item {
+        padding: 1rem;
+        background-color: var(--container-bg);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .infographic-item:hover {
+        transform: translateY(-10px);
+    }
+
+    .steps {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+    }
+
+    .step {
+        flex: 1;
+        text-align: center;
+        padding: 1rem;
+        margin: 0 1rem;
+        background-color: var(--container-bg);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .icon-pulse {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .zoom-on-hover:hover {
+        transform: scale(1.05);
+    }
+
+    .benefit-cards {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 2rem;
+    }
+
+    .flip-card {
+        background-color: transparent;
+        width: 300px;
+        height: 200px;
+        perspective: 1000px;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .flip-card-front {
+        background-color: var(--container-bg);
+        color: var(--text-color);
+    }
+
+    .flip-card-back {
+        background-color: var(--button-bg);
+        color: white;
+        transform: rotateY(180deg);
+    }
+
+    .integration-diagram {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 2rem 0;
+    }
+
+    .diagram-item {
+        padding: 1rem;
+        background-color: var(--container-bg);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .diagram-arrow {
+        font-size: 2rem;
+        margin: 0 1rem;
+    }
+
+    .testimonial-carousel {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .testimonial {
+        padding: 2rem;
+        background-color: var(--container-bg);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin-top: 2rem;
+    }
+
+    .learn-more-links {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .btn {
+        margin: 0 1rem;
+    }
+
+    .pulse {
+        animation: pulse 2s infinite;
+    }
+
+    @media (max-width: 768px) {
+        .steps, .benefit-cards {
+            flex-direction: column;
+        }
+
+        .step, .flip-card {
+            margin-bottom: 1rem;
+        }
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+{% endblock %}

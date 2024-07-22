@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}Help - TML Updater{% endblock %}
+
+{% block content %}
+<div class="help-container">
+    <h1 class="page-title">Help Center</h1>
+    
+    <section class="getting-started">
+        <h2>Getting Started</h2>
+        <ol>
+            <li>Upload your TML file</li>
+            <li>Select the type of update you want to make</li>
+            <li>Make your changes in the provided interface</li>
+            <li>Preview your changes</li>
+            <li>Download the updated TML file</li>
+        </ol>
+    </section>
+
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>What file types does TML Updater support?</h3>
+            <p>TML Updater supports .tml files used by ThoughtSpot.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I undo changes made to my TML file?</h3>
+            <p>Yes, you can revert changes before downloading the updated file.</p>
+        </div>
+        <!-- Add more FAQ items as needed -->
+    </section>
+
+    <section class="video-tutorials">
+        <h2>Video Tutorials</h2>
+        <div class="video-container">
+            <!-- Embed your video tutorials here -->
+            <p>Coming soon! Check back for helpful video guides on using TML Updater.</p>
+        </div>
+    </section>
+
+    <section class="best-practices">
+        <h2>Best Practices</h2>
+        <ul>
+            <li>Always backup your original TML files before making changes</li>
+            <li>Use descriptive names for your updated files</li>
+            <li>Test your updated TML files in a non-production environment first</li>
+        </ul>
+    </section>
+
+    <section class="glossary">
+        <h2>Glossary</h2>
+        <dl>
+            <dt>TML</dt>
+            <dd>ThoughtSpot Modeling Language, used to define data models in ThoughtSpot</dd>
+            <dt>Join</dt>
+            <dd>A connection between two or more tables in a data model</dd>
+            <!-- Add more terms as needed -->
+        </dl>
+    </section>
+
+    <section class="troubleshooting">
+        <h2>Troubleshooting</h2>
+        <p>If you encounter any issues while using TML Updater, try the following:</p>
+        <ul>
+            <li>Ensure your TML file is correctly formatted</li>
+            <li>Clear your browser cache and try again</li>
+            <li>Check our FAQ section for common issues and solutions</li>
+        </ul>
+    </section>
+
+    <section class="contact-support">
+        <h2>Need More Help?</h2>
+        <p>If you need additional assistance, please contact our support team at <a href="mailto:support@tmlupdater.com">support@tmlupdater.com</a>.</p>
+    </section>
+</div>
+
+<style>
+    .help-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .page-title {
+        text-align: center;
+        color: var(--text-color);
+        margin-bottom: 30px;
+    }
+
+    section {
+        margin-bottom: 40px;
+    }
+
+    h2 {
+        color: var(--text-color);
+        border-bottom: 2px solid var(--button-bg);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .faq-item {
+        margin-bottom: 20px;
+    }
+
+    .faq-item h3 {
+        color: var(--text-color);
+        margin-bottom: 10px;
+    }
+
+    .video-container {
+        background-color: var(--container-bg);
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    dl {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 10px 20px;
+    }
+
+    dt {
+        font-weight: bold;
+        color: var(--text-color);
+    }
+
+    dd {
+        margin-left: 0;
+    }
+
+    .contact-support {
+        background-color: var(--container-bg);
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+</style>
+{% endblock %}
