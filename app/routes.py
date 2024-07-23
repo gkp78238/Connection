@@ -1,12 +1,11 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session
 from thoughtspot_tml import Table
 import os
+import json
 from anthropic import Anthropic
+from app.json_to_tml import json_to_tml
 
 client = Anthropic(api_key="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")
-
-
-
 
 main = Blueprint('main', __name__)
 
@@ -33,10 +32,23 @@ def chatbot():
 @main.route('/update_tml', methods=['POST'])
 def update_tml():
     file = request.files.get('tmlFile')
-    if file and file.filename.endswith('.tml'):
+    file_type = request.form.get('fileType')
+    
+    if file and (file.filename.endswith('.tml') or file.filename.endswith('.json')):
         file_path = os.path.join('temp', file.filename)
         file.save(file_path)
-        session['tml_file_path'] = file_path
+        
+        if file.filename.endswith('.json'):
+            with open(file_path, 'r') as json_file:
+                json_data = json.load(json_file)
+            tml_content = json_to_tml(json_data)
+            tml_file_path = os.path.join('temp', f"{os.path.splitext(file.filename)[0]}.tml")
+            with open(tml_file_path, 'w') as tml_file:
+                tml_file.write(tml_content)
+            session['tml_file_path'] = tml_file_path
+        else:
+            session['tml_file_path'] = file_path
+        
         return redirect(url_for('main.edit_tml'))
     else:
         return jsonify({"error": "No file or incorrect file type"}), 400
@@ -114,9 +126,6 @@ def tml_insights():
     
     return jsonify({'response': response})
 
-
-
-
 def generate_response(question, tml_data):
     prompt = f"""
     TML File Content:
@@ -136,4 +145,3 @@ def generate_response(question, tml_data):
     )
 
     return message.content[0].text
-

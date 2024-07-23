@@ -1,0 +1,158 @@
+{
+  "guid": "d555b1a7-d24b-42ab-b4eb-7e373b202cff",
+  "table": {
+    "name": "ACCT_POSITIONS_CURRENT",
+    "db": "DEV_104336_POC_DB",
+    "schema": "ACCOUNT_PARTY",
+    "db_table": "ACCT_POSITIONS",
+    "connection": {
+      "name": "AWM_SF_PoC_12_8_23"
+    },
+    "columns": [
+      {
+        "name": "BUSINESS_DATE",
+        "db_column_name": "BUSINESS_DATE",
+        "properties": {
+          "column_type": "ATTRIBUTE",
+          "index_type": "DONT_INDEX"
+        },
+        "db_column_properties": {
+          "data_type": "VARCHAR"
+        }
+      },
+      {
+        "name": "POSITION_DATE",
+        "db_column_name": "POSITION_DATE",
+        "properties": {
+          "column_type": "ATTRIBUTE",
+          "index_type": "DONT_INDEX"
+        },
+        "db_column_properties": {
+          "data_type": "VARCHAR"
+        }
+      },
+      {
+        "name": "ACCOUNT_NUMBER",
+        "db_column_name": "ACCOUNT_NUMBER",
+        "properties": {
+          "column_type": "ATTRIBUTE",
+          "index_type": "DONT_INDEX"
+        },
+        "db_column_properties": {
+          "data_type": "VARCHAR"
+        }
+      },
+      {
+        "name": "INSTRUMENT_CODE",
+        "db_column_name": "INSTRUMENT_CODE",
+        "properties": {
+          "column_type": "ATTRIBUTE",
+          "index_type": "DONT_INDEX"
+        },
+        "db_column_properties": {
+          "data_type": "VARCHAR"
+        }
+      },
+      {
+        "name": "SUB_LEDGER_NAME",
+        "db_column_name": "SUB_LEDGER_NAME",
+        "properties": {
+          "column_type": "ATTRIBUTE",
+          "index_type": "DONT_INDEX"
+        },
+        "db_column_properties": {
+          "data_type": "VARCHAR"
+        }
+      },
+      {
+        "name": "TRADED_UNIT_QUANTITY",
+        "db_column_name": "TRADED_UNIT_QUANTITY",
+        "properties": {
+          "column_type": "MEASURE",
+          "aggregation": "SUM",
+          "index_type": "DONT_INDEX"
+        },
+        "db_column_properties": {
+          "data_type": "DOUBLE"
+        }
+      },
+      {
+        "name": "BASE_MARKET_PRICE",
+        "db_column_name": "BASE_MARKET_PRICE",
+        "properties": {
+          "column_type": "MEASURE",
+          "aggregation": "SUM",
+          "index_type": "DONT_INDEX"
+        },
+        "db_column_properties": {
+          "data_type": "DOUBLE"
+        }
+      },
+      {
+        "name": "BASE_TRADED_MARKET_VALUE_AMOUNT",
+        "db_column_name": "BASE_TRADED_MARKET_VALUE_AMOUNT",
+        "properties": {
+          "column_type": "MEASURE",
+          "aggregation": "SUM",
+          "index_type": "DONT_INDEX"
+        },
+        "db_column_properties": {
+          "data_type": "DOUBLE"
+        }
+      },
+      {
+        "name": "BASE_EXPECTED_INCOME_AMOUNT",
+        "db_column_name": "BASE_EXPECTED_INCOME_AMOUNT",
+        "properties": {
+          "column_type": "MEASURE",
+          "aggregation": "SUM",
+          "index_type": "DONT_INDEX"
+        },
+        "db_column_properties": {
+          "data_type": "DOUBLE"
+        }
+      },
+      {
+        "name": "BASE_TRADED_SHORT_TERM_UNREALIZED_GAIN_LOSS_AMOUNT",
+        "db_column_name": "BASE_TRADED_SHORT_TERM_UNREALIZED_GAIN_LOSS_AMOUNT",
+        "properties": {
+          "column_type": "MEASURE",
+          "aggregation": "SUM",
+          "index_type": "DONT_INDEX"
+        },
+        "db_column_properties": {
+          "data_type": "DOUBLE"
+        }
+      },
+      {
+        "name": "BUSINESS_SYSTEM_CODE",
+        "db_column_name": "BUSINESS_SYSTEM_CODE",
+        "properties": {
+          "column_type": "ATTRIBUTE",
+          "index_type": "DONT_INDEX"
+        },
+        "db_column_properties": {
+          "data_type": "VARCHAR"
+        }
+      }
+    ],
+    "joins_with": [
+      {
+        "name": "ACCT_POSITIONS_CURRENT_to_CORE_ACCOUNT_MERIDIAN_CURRENT",
+        "destination": {
+          "name": "CORE_ACCOUNT_MERIDIAN_CURRENT"
+        },
+        "on": "[ACCT_POSITIONS_CURRENT::BUSINESS_DATE] = [CORE_ACCOUNT_MERIDIAN_CURRENT::BUSINESS_DATE] AND [ACCT_POSITIONS_CURRENT::ACCOUNT_NUMBER] = [CORE_ACCOUNT_MERIDIAN_CURRENT::ALTERNATE_ACCOUNT_IDENTIFIER] AND [ACCT_POSITIONS_CURRENT::BUSINESS_SYSTEM_CODE] = [CORE_ACCOUNT_MERIDIAN_CURRENT::BUSINESS_SYSTEM_CODE]",
+        "type": "INNER"
+      },
+      {
+        "name": "ACCT_POSITIONS_CURRENT_to_CORE_INSTRUMENTS_CURRENT",
+        "destination": {
+          "name": "CORE_INSTRUMENTS_CURRENT"
+        },
+        "on": "[ACCT_POSITIONS_CURRENT::BUSINESS_SYSTEM_CODE] = [CORE_INSTRUMENTS_CURRENT::BUSINESS_SYSTEM_CODE] AND [ACCT_POSITIONS_CURRENT::INSTRUMENT_CODE] = [CORE_INSTRUMENTS_CURRENT::INSTRUMENT_CODE] AND [ACCT_POSITIONS_CURRENT::BUSINESS_DATE] = [CORE_INSTRUMENTS_CURRENT::BUSINESS_DATE]",
+        "type": "INNER"
+      }
+    ]
+  }
+}

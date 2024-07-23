@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="update-container">
-    <h1 class="page-title">Update Your TML File</h1>
+    <h1 class="page-title">Update Your TML or JSON File</h1>
 
     <div class="update-steps">
         <div class="step active">
@@ -22,10 +22,18 @@
     </div>
 
     <form method="POST" action="{{ url_for('main.update_tml') }}" enctype="multipart/form-data">
+        <div class="file-type-selection">
+            <label for="fileType">Select File Type:</label>
+            <select id="fileType" name="fileType">
+                <option value="tml">TML</option>
+                <option value="json">JSON</option>
+            </select>
+        </div>
+
         <div class="upload-area" id="dropZone">
             <i class="fas fa-cloud-upload-alt"></i>
-            <p>Drag and drop your TML file here or click to browse</p>
-            <input type="file" class="form-control-file" id="tmlFile" name="tmlFile" accept=".tml" required>
+            <p>Drag and drop your TML or JSON file here or click to browse</p>
+            <input type="file" class="form-control-file" id="tmlFile" name="tmlFile" accept=".tml,.json" required>
         </div>
 
         <div class="file-preview" id="filePreview">
@@ -33,13 +41,13 @@
             <pre><code id="fileContent"></code></pre>
         </div>
 
-        <button type="submit" class="btn btn-primary" id="submitBtn">Update TML</button>
+        <button type="submit" class="btn btn-primary" id="submitBtn">Update File</button>
     </form>
 
     <div id="chatContainer" style="display: none;">
         <h2>TML Insights Chatbot</h2>
         <div id="chatMessages"></div>
-        <input type="text" id="userInput" placeholder="Ask about your TML file...">
+        <input type="text" id="userInput" placeholder="Ask about your file...">
         <button id="sendBtn">Send</button>
     </div>
 </div>
@@ -192,13 +200,12 @@
         cursor: pointer;
     }
 </style>
-
 <script>
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('tmlFile');
     const filePreview = document.getElementById('filePreview');
     const fileContent = document.getElementById('fileContent');
-    let tmlContent = '';
+    let fileData = '';
 
     dropZone.addEventListener('click', () => fileInput.click());
 
@@ -222,7 +229,7 @@
 
     function handleFileUpload() {
         const file = fileInput.files[0];
-        if (file && file.name.endsWith('.tml')) {
+        if (file && (file.name.endsWith('.tml') || file.name.endsWith('.json'))) {
             previewFile(file);
         }
     }
@@ -230,8 +237,8 @@
     function previewFile(file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-            tmlContent = e.target.result;
-            fileContent.textContent = tmlContent;
+            fileData = e.target.result;
+            fileContent.textContent = fileData;
             filePreview.style.display = 'block';
             document.getElementById('chatContainer').style.display = 'block';
         };
@@ -248,7 +255,7 @@
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({question: question, tml_content: tmlContent})
+            body: JSON.stringify({question: question, tml_content: fileData})
         })
         .then(response => response.json())
         .then(data => {
@@ -262,6 +269,5 @@
             alert('An error occurred while getting insights.');
         });
     });
-    
 </script>
 {% endblock %}
